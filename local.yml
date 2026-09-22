@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: batna_db
+    image: postgres:18.6
+    restart: always
+    shm_size: 128mb
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: batna_db
+
+  web:
+    container_name: batna_web
+    build: .
+    ports:
+      - 8000:8000
+
+volumes:
+  postgres_data:
