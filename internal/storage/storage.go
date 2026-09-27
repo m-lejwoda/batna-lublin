@@ -9,3 +9,7 @@ type InvestmentStorage struct {
 func NewInvestmentStorage(db *db.DB) InvestmentStorage {
 	return InvestmentStorage{db: db}
 }
+
+func (i InvestmentStorage) GetInvestments(){
+	
+}

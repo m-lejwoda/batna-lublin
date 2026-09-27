@@ -15,15 +15,15 @@ type Investment struct {
 }
 
 type Flat struct {
-	ID             int
+	ID             int32
 	CustomID 			 string
 	Name           string
-	FloorArea      int64
+	FloorArea      int32
 	Layout         string
-	Floor          int64
+	Floor          int32
 	FlatNumber     string
 	BuildingNumber string
-	RoomsNumber    int64
+	RoomsNumber    int32
 	Balcony        bool
 	InvestmentID   int32
 }
@@ -31,12 +31,12 @@ type Flat struct {
 type ParkingPlace struct {
 	ID           int
 	Type         string
-	FloorArea    int64
+	FloorArea    int32
 	InvestmentID int32
 }
 
 type FlatStatus struct {
-	Price     int64
+	Price     int32
 	Currency  string
 	Status    string
 	CreatedAt time.Time
@@ -45,7 +45,7 @@ type FlatStatus struct {
 
 type ParkingPlaceStatus struct {
 	Price          int64
-	Currenct       string
+	Currency       string
 	Status         string
 	CreatedAt      time.Time
 	ParkingPlaceID int32
@@ -58,7 +58,7 @@ type InvestmentComment struct {
 }
 
 type FlatComment struct {
-	comment string
-	importancy int32
+	Comment string
+	Importancy int32
 	FlatID int32
 }
