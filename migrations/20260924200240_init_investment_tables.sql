@@ -40,7 +40,7 @@ CREATE TABLE parking_place(
 CREATE TABLE flat_status(
   price BIGINT
   currency VARCHAR(10)
-  status VARCHAR(20)
+  status VARCHAR(20) CHECK (status in ("free", "reserved", "sold"))
   flat_id INT NOT NULL
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 
@@ -50,7 +50,7 @@ CREATE TABLE flat_status(
 CREATE TABLE parking_place_status(
   price BIGINT
   currency VARCHAR(10)
-  status VARCHAR(20)
+  status VARCHAR(20) CHECK (status in ("free", "reserved", "sold"))
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
   parking_place_id INT NOT NULL
 
@@ -67,7 +67,7 @@ CREATE TABLE flat_comment(
 
 CREATE TABLE investment_comment(
   comments Text 
-  importanancy INT CHECK (importanancy <= 10)
+  importanncy INT CHECK (importanncy <= 10)
   investment_id INT
 
   CONSTRAINT fk_investment_comment_investment FOREIGN KEY (investment_id) REFERENCES investment(id)

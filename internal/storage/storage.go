@@ -11,5 +11,9 @@ func NewInvestmentStorage(db *db.DB) InvestmentStorage {
 }
 
 func (i InvestmentStorage) GetInvestments(){
-	
+		
+}
+
+func (i InvestmentStorage) CreateInvestment(ci CreateInvestmentRequest){
+	i.db.Pool.Query()
 }
