@@ -1,5 +1,6 @@
 package repository
 
 type InvestmentRepository interface {
-	GetInvestment()
+	GetInvestments()
+	GetSingleInvestment(id int32)
 }
