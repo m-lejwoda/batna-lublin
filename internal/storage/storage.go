@@ -10,10 +10,10 @@ func NewInvestmentStorage(db *db.DB) InvestmentStorage {
 	return InvestmentStorage{db: db}
 }
 
-func (i InvestmentStorage) GetInvestments(){
-		
+func (i InvestmentStorage) GetInvestments(ctx context.Context){
+	i.db.Pool.Query()	
 }
 
-func (i InvestmentStorage) CreateInvestment(ci CreateInvestmentRequest){
+func (i InvestmentStorage) CreateInvestment(ctx context.Context){
 	i.db.Pool.Query()
 }
