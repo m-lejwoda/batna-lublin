@@ -4,7 +4,7 @@ import "time"
 
 type Investment struct {
 	ID                      int32
-	CustomID 								string
+	CustomID                string
 	Name                    string
 	FinishDate              time.Time
 	OfficeLocation          string
@@ -16,7 +16,7 @@ type Investment struct {
 
 type Flat struct {
 	ID             int32
-	CustomID 			 string
+	CustomID       string
 	Name           string
 	FloorArea      int32
 	Layout         string
@@ -52,13 +52,13 @@ type ParkingPlaceStatus struct {
 }
 
 type InvestmentComment struct {
-	Comment string
-	Importancy int32
-	InvestmentID int32 
+	Comment      string
+	Importancy   int32
+	InvestmentID int32
 }
 
 type FlatComment struct {
-	Comment string
+	Comment    string
 	Importancy int32
-	FlatID int32
+	FlatID     int32
 }

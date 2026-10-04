@@ -18,6 +18,11 @@ services:
     build: .
     ports:
       - 8000:8000
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d batna_db"]
+      interval: 5s
+      retries: 5
+    
 
 volumes:
   postgres_data:
