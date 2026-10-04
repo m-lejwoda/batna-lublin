@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/m-lejwoda/batna-lublin/internal/dto"
 	"github.com/m-lejwoda/batna-lublin/internal/repository"
@@ -16,17 +17,37 @@ func NewInvestmentService(investmentRepo repository.InvestmentRepository) Invest
 }
 
 func (i InvestmentService) GetInvestments(ctx context.Context) ([]dto.InvestmentResponse, error) {
-	i.investmentRepo.GetInvestments(ctx)
+	investments, err := i.investmentRepo.GetInvestments(ctx)
+	if err != nil {
+		fmt.Println("List Investment Error")
+	}
+	return investments, nil
 }
 
 func (i InvestmentService) GetInvestment(ctx context.Context, id int32) (dto.InvestmentResponse, error) {
-	i.investmentRepo.GetInvestment(id)
+
+	investment, err := i.investmentRepo.GetInvestment(ctx, id)
+	if err != nil {
+		fmt.Println("List Investment Error")
+	}
+	return investment, nil
+
 }
 
 func (i InvestmentService) CreateInvestment(ctx context.Context, investment dto.CreateInvestmentRequest) (dto.InvestmentResponse, error) {
-	i.investmentRepo.CreateInvestment(ctx, investment)
+	createdInvestment, err := i.investmentRepo.CreateInvestment(ctx, investment)
+	if err != nil {
+		fmt.Println("List Investment Error")
+	}
+	return createdInvestment, nil
+
 }
 
 func (i InvestmentService) GetFlat(ctx context.Context, id int32) (dto.FlatResponse, error) {
-	i.investmentRepo.GetFlat(ctx, id)
+	flat, err := i.investmentRepo.GetFlat(ctx, id)
+	if err != nil {
+		fmt.Println("List Investment Error")
+	}
+	return flat, nil
+
 }

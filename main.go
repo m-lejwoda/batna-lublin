@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/m-lejwoda/batna-lublin/internal/db"
@@ -21,4 +22,6 @@ func main() {
 	newInvestmentStorage := storage.NewInvestmentStorage(database)
 	newInvestmentService := service.NewInvestmentService(newInvestmentStorage)
 	newInvestmentHandler := handler.NewInvestmentHandler(newInvestmentService)
+	mux := http.NewServeMux()
+	handler.RegisterInvestmentRoutes(mux, &newInvestmentHandler)
 }
