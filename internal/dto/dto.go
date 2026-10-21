@@ -24,7 +24,18 @@ type CreateInvestmentRequest struct {
 	SurfaceParkingPlace     bool      `json:"surface_parking_place"`
 	Garage                  bool      `json:"garage"`
 }
-
+type CreateFlatRequest struct {
+	CustomID       string `json:"custom_id"`
+	Name           string `json:"name"`
+	FloorArea      int32  `json:"floor_area"`
+	Layout         string `json:"layout"`
+	Floor          int32  `json:"floor"`
+	FlatNumber     string `json:"flat_number"`
+	BuildingNumber string `json:"building_number"`
+	RoomsNumber    int32  `json:"rooms_number"`
+	Balcony        bool   `json:"balcony"`
+	InvestmentID   int32  `json:"investment_id"`
+}
 type FlatResponse struct {
 	ID             int32  `json:"id"`
 	CustomID       string `json:"custom_id"`

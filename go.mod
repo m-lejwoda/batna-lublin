@@ -10,7 +10,9 @@ require (
 	github.com/AzureAD/microsoft-authentication-library-for-go v1.9.0 // indirect
 	github.com/ClickHouse/ch-go v0.74.0 // indirect
 	github.com/ClickHouse/clickhouse-go/v2 v2.48.0 // indirect
+	github.com/PuerkitoBio/goquery v1.13.0 // indirect
 	github.com/andybalholm/brotli v1.2.3 // indirect
+	github.com/andybalholm/cascadia v1.3.4 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/coder/websocket v1.8.15 // indirect

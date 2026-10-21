@@ -4,4 +4,5 @@ import "fmt"
 
 func GetLalakFlats() {
 	fmt.Println("Get Flats")
+
 }
