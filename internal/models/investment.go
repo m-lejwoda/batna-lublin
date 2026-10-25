@@ -37,7 +37,7 @@ type ParkingPlace struct {
 
 type FlatStatus struct {
 	Price     int32
-	Currency  string
+	Currency  int64
 	Status    string
 	CreatedAt time.Time
 	FlatID    int32

@@ -33,6 +33,7 @@ func main() {
 
 		case "multimel":
 			fmt.Println("Multimel")
+			scrappers.GetMultimelFlats()
 			return
 
 		default:
