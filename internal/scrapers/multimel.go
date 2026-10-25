@@ -49,6 +49,7 @@ func GetMultimelFlats() {
 		fmt.Println("pricePerMeter", pricePerMeter)
 		fmt.Println("status", status)
 		flatPageResp, err := http.Get(href)
+		defer flatPageResp.Body.Close()
 		if err != nil {
 			log.Fatalf("Error to get flatPage website")
 		}
@@ -70,6 +71,13 @@ func GetMultimelFlats() {
 			}
 		})
 		balcony, _ = strconv.Atoi(strings.TrimSuffix(flatPage.Find("mm-feature-box").Last().Find("strong").Text(), " m²"))
+		layoutLink, exists := documentFlat.Find("btn-outline-primary mm-ask-btn").Attr("href")
+		if !exists {
+			log.Fatalf("No href")
+		}
+		layoutUrl := "https://multimel-nieruchomosci.pl/" + layoutLink
+		layout := http.Get(layoutUrl)
+		defer layout.Body.Close()
 
 	})
 
