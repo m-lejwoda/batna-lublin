@@ -122,6 +122,7 @@ func GetMultimelFlats() {
 			fmt.Println("File Saved")
 		} else {
 			fmt.Println("File exists")
+
 		}
 	})
 
