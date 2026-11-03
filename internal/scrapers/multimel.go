@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -28,6 +29,7 @@ func GetMultimelFlats() {
 	}
 	selected := document.Find(".mm-card")
 	selected.Each(func(i int, singleSelected *goquery.Selection) {
+		fmt.Println("iteracja")
 		customID := ""
 		price := 0
 		pricePerMeter := 0
@@ -101,19 +103,26 @@ func GetMultimelFlats() {
 			log.Fatalf("Problem with Get")
 		}
 		defer layout.Body.Close()
-
-		out, err := os.Create(customID + ".pdf")
+		multimelLayoutDirPath := "multimel/layouts/"
+		dir := filepath.Dir(multimelLayoutDirPath)
+		os.MkdirAll(dir, 0755)
+		_, err = os.Stat(multimelLayoutDirPath + customID + ".pdf")
 		if err != nil {
-			log.Fatalf("Cant create file")
-		}
-		defer out.Close()
-		_, err = io.Copy(out, layout.Body)
+			fmt.Println("nie ma")
+			out, err := os.Create(multimelLayoutDirPath + customID + ".pdf")
+			if err != nil {
+				log.Fatalf("Cant create file")
+			}
+			defer out.Close()
+			_, err = io.Copy(out, layout.Body)
 
-		if err != nil {
-			log.Fatalf("Can't save file")
+			if err != nil {
+				log.Fatalf("Can't save file")
+			}
+			fmt.Println("File Saved")
+		} else {
+			fmt.Println("File exists")
 		}
-		fmt.Println("File Saved")
-		os.Exit(1)
 	})
 
 }
