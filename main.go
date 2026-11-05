@@ -26,6 +26,11 @@ func main() {
 	if len(os.Args) > 1 {
 		command := os.Args[1]
 		switch command {
+
+		case "interbud":
+			fmt.Println("Interbud")
+			scrappers.GetInterbudFlats()
+			return
 		case "lalak":
 			fmt.Println("Lalak")
 			scrappers.GetLalakFlats()
