@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
+	"github.com/m-lejwoda/batna-lublin/internal/cmd"
 	"github.com/m-lejwoda/batna-lublin/internal/db"
 	handler "github.com/m-lejwoda/batna-lublin/internal/handlers"
 	scrappers "github.com/m-lejwoda/batna-lublin/internal/scrapers"
@@ -23,12 +25,17 @@ func main() {
 		log.Fatalf("Error connection")
 	}
 	defer database.Close()
+	ctx := context.Background()
+	newInvestmentStorage := storage.NewInvestmentStorage(database)
+	newInvestmentService := service.NewInvestmentService(newInvestmentStorage)
+	newInvestmentHandler := handler.NewInvestmentHandler(newInvestmentService)
 	if len(os.Args) > 1 {
 		command := os.Args[1]
 		switch command {
 
 		case "interbud":
 			fmt.Println("Interbud")
+			cmd.ImportInterbudInvestment(ctx, newInvestmentService)
 			scrappers.GetInterbudFlats()
 			return
 		case "lalak":
@@ -46,9 +53,6 @@ func main() {
 			return
 		}
 	}
-	newInvestmentStorage := storage.NewInvestmentStorage(database)
-	newInvestmentService := service.NewInvestmentService(newInvestmentStorage)
-	newInvestmentHandler := handler.NewInvestmentHandler(newInvestmentService)
 	mux := http.NewServeMux()
 	handler.RegisterInvestmentRoutes(mux, &newInvestmentHandler)
 	err = http.ListenAndServe(":8000", mux)

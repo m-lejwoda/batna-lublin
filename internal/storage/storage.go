@@ -38,6 +38,13 @@ func (i InvestmentStorage) GetInvestment(ctx context.Context, id int32) (dto.Inv
 	return inv, nil
 }
 
+func (i InvestmentStorage) GetInvestmentByName(ctx context.Context, name string) (dto.InvestmentResponse, error) {
+	row := i.db.Pool.QueryRow(ctx, "SELECT id, custom_id, name, finish_date, office_location, phone, underground_parking_place, surface_parking_place, garage FROM investment WHERE name=$1", name)
+	var inv dto.InvestmentResponse
+	err := row.Scan(&inv.ID, &inv.CustomID, &inv.Name, &inv.FinishDate, &inv.OfficeLocation, &inv.Phone, &inv.UndergroundParkingPlace, &inv.SurfaceParkingPlace, &inv.Garage)
+	return inv, err
+}
+
 func (i InvestmentStorage) CreateInvestment(ctx context.Context, investment dto.CreateInvestmentRequest) (dto.InvestmentResponse, error) {
 	row := i.db.Pool.QueryRow(ctx, `INSERT INTO (custom_id, name, finish_date, office_location, phone, underground_parking_place, surface_parking_place, garage)
 	Values($1, $2, $3, $4, $5, $6, $7, $8)

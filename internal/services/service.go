@@ -24,6 +24,10 @@ func (i InvestmentService) GetInvestments(ctx context.Context) ([]dto.Investment
 	return investments, nil
 }
 
+func (i InvestmentService) GetInvestmentByName(ctx context.Context, name string) {
+	investment, err := i.investmentRepo.GetInvestmentByName(ctx, name)
+}
+
 func (i InvestmentService) GetInvestment(ctx context.Context, id int32) (dto.InvestmentResponse, error) {
 
 	investment, err := i.investmentRepo.GetInvestment(ctx, id)

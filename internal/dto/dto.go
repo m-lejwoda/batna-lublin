@@ -58,6 +58,7 @@ type ParkingPlaceResponse struct {
 }
 
 type FlatStatusResponse struct {
+	CustomID  string    `json:"custom_id"`
 	Price     int32     `json:"price"`
 	Currency  string    `json:"currency"`
 	Status    string    `json:"status"`
