@@ -24,8 +24,10 @@ func (i InvestmentService) GetInvestments(ctx context.Context) ([]dto.Investment
 	return investments, nil
 }
 
-func (i InvestmentService) GetInvestmentByName(ctx context.Context, name string) {
+func (i InvestmentService) GetInvestmentByName(ctx context.Context, name string) (dto.InvestmentResponse, error) {
 	investment, err := i.investmentRepo.GetInvestmentByName(ctx, name)
+	return investment, err
+
 }
 
 func (i InvestmentService) GetInvestment(ctx context.Context, id int32) (dto.InvestmentResponse, error) {
@@ -54,4 +56,12 @@ func (i InvestmentService) GetFlat(ctx context.Context, id int32) (dto.FlatRespo
 	}
 	return flat, nil
 
+}
+
+func (i InvestmentService) GetFlatsFromInvestment(ctx context.Context, name string) ([]dto.FlatResponse, error) {
+	flats, err := i.investmentRepo.GetFlatsFromInvestment(ctx, investment)
+	if err != nil {
+
+	}
+	return flats, nil
 }

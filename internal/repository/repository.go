@@ -15,4 +15,5 @@ type InvestmentRepository interface {
 	GetFlat(ctx context.Context, flatID int32) (dto.FlatResponse, error)
 	GetAllFlatStatuses(ctx context.Context, investmentId int32) (dto.FlatStatusResponse, error)
 	CreateFlat(ctx context.Context, createFlat dto.CreateFlatRequest) (dto.FlatResponse, error)
+	GetFlatsFromInvestment(ctx context.Context, investment string) ([]dto.FlatResponse, error)
 }

@@ -25,7 +25,6 @@ func GetInterbudFlats() {
 	fmt.Println("Open document")
 	selected := document.Find(".col-lg-6.col-xl-4.local-item.mb-4")
 	selected.Each(func(i int, singleSelected *goquery.Selection) {
-		fmt.Println("Loop")
 		customID := ""
 		price := 0
 		pricePerMeter := 0

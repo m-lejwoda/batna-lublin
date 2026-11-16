@@ -69,6 +69,29 @@ func (i InvestmentStorage) GetFlats(ctx context.Context, id int32) ([]dto.FlatRe
 	}
 	return flats, nil
 }
+func (i InvestmentStorage) GetFlatsFromInvestment(ctx context.Context, investment string) ([]dto.FlatResponse, error) {
+	query := `
+	SELECT 
+		f.id, f.custom_id, f.name, f.floor_area, f.layout, 
+		f.floor, f.flat_number, f.building_number, f.rooms_number, 
+		f.balcony, f.investment_id
+	FROM flat f
+	JOIN investment inv ON f.investment_id = inv.id
+	WHERE inv.name = $1
+`
+	rows, err := i.db.Pool.Query(ctx, query, investment)
+	if err != nil {
+		fmt.Println(err)
+	}
+	var flats []dto.FlatResponse
+	defer rows.Close()
+	for rows.Next() {
+		var flat dto.FlatResponse
+		rows.Scan(&flat.ID, &flat.CustomID, &flat.Name, &flat.FloorArea, &flat.Layout, &flat.Floor, &flat.FlatNumber, &flat.BuildingNumber, &flat.RoomsNumber, &flat.Balcony, &flat.InvestmentID)
+		flats = append(flats, flat)
+	}
+	return flats, nil
+}
 
 func (i InvestmentStorage) GetFlat(ctx context.Context, flatID int32) (dto.FlatResponse, error) {
 	row := i.db.Pool.QueryRow(ctx, "SELECT id, custom_id, name, floor_area, layout, floor, flat_number, building_number, rooms_number, balcony, investment_id from flat WHERE id=$1", flatID)
